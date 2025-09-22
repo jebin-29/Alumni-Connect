@@ -24,7 +24,7 @@ const server = http.createServer(app);
 // Configure CORS
 app.use(cors({
   // Updated origin array to include the new Vercel domain
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://alumni-connect-puce.vercel.app'],
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://alumni-connect-cx929wgnx-jebin-ds-projects.vercel.app/', 'https://alumni-connect-puce.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
