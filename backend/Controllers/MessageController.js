@@ -1,5 +1,5 @@
 const Conversation = require("../Models/conversation");
-const Message = require("../Models/Message");
+const Message = require("../Models/message");
 const User = require("../Models/users");
 const Alumni = require("../Models/alumni");
 const { getReceiverSocketId, io } = require("../socket/socket");
