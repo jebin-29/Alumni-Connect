@@ -48,7 +48,7 @@ function AlumniReg() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/api/alumni/signup', formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/alumni/signup`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

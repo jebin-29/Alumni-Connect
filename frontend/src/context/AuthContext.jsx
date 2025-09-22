@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
                 
                 if (token && userData) {
                     // Verify token with backend
-                    const response = await axios.get('http://localhost:8080/api/auth/verify', {
+                    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/auth/verify`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }

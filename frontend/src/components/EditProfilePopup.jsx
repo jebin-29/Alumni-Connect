@@ -14,12 +14,13 @@ const EditProfilePopup = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const userId = localStorage.getItem("userId"); // Get userId from localStorage
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   // Fetch the user profile data on component mount
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/user/${userId}`);
+        const response = await axios.get(`${BASE_URL}/api/user/${userId}`);
         setFormData({
           fullName: response.data.fullName || "",
           graduationYear: response.data.graduationYear || "",
@@ -48,7 +49,7 @@ const EditProfilePopup = ({ onClose }) => {
   const handleSave = async () => {
     try {
       // Make the PUT request to update the user profile
-      await axios.put(`http://localhost:8080/api/user/${userId}`, formData);
+      await axios.put(`${BASE_URL}/api/user/${userId}`, formData);
       setError(null);
   
       // Save only the updated fullName (as a string) in localStorage

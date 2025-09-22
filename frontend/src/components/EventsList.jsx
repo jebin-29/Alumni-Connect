@@ -6,11 +6,13 @@ const EventsList = () => {
   const [loading, setLoading] = useState(true); // State to manage loading status
   const [error, setError] = useState(null); // State to handle errors
 
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     // Fetch events from backend API
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/events");
+        const response = await axios.get(`${BASE_URL}/api/events`);
         setEvents(response.data); // Update events state with fetched data
         setLoading(false);
       } catch (err) {

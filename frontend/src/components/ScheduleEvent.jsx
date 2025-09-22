@@ -35,7 +35,7 @@ const ScheduleEvent = ({ onCancel }) => {
 
     try {
       // POST request to create a new event
-      const response = await axios.post("http://localhost:8080/api/events", eventData);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/events`, eventData);
 
       // Show success message and reset form if request is successful
       handleSuccess("Event Scheduled Successfully");
