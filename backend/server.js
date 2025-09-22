@@ -10,29 +10,41 @@ const uploadRoute = require('./Routes/routeUpload');
 const eventRouter = require('./Routes/eventRoutes');
 const messageRoutes = require('./Routes/messageRoutes');
 const userRoutes = require('./Routes/userRoutes');
-const connectCloudinary = require('./utils/cloudinary')
-const AdminRoutes = require('./Routes/AdminRoutes')
+const connectCloudinary = require('./utils/cloudinary');
+const AdminRoutes = require('./Routes/AdminRoutes');
 const networkRoutes = require('./Routes/NetworkRoutes');
 const postRoutes = require('./Routes/postRoutes');
-const followRoutes = require('./Routes/FollowRoutes');
 require('./Models/db');
 
 connectCloudinary();
 const app = express();
-const server = http.createServer(app); // Create HTTP server
+const server = http.createServer(app);
+
+// ✅ Allowed origins: localhost (dev) + frontend (prod)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://alumni-connect-puce.vercel.app/", // replace with your real Vercel URL
+];
 
 // Configure CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Initialize socket with proper CORS config
+// Initialize socket with same CORS config
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -46,17 +58,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Backend is Working');
+  res.send('Backend is Working ✅');
 });
 
 // API Routes
-console.log('Mounting API routes...');
-
-app.use('/api/follow', (req, res, next) => {
-    console.log('Follow route hit:', req.path);
-    followRoutes(req, res, next);
-});
-
+app.use('/api/follow', followRoutes);
 app.use('/api/auth', AuthRouter);
 app.use('/api/user', userRoutes);
 app.use('/api/network', networkRoutes);
@@ -67,10 +73,8 @@ app.use('/api/messages', messageRoutes);
 app.use('/admin', AdminRoutes);
 app.use('/api/posts', postRoutes);
 
-console.log('API routes mounted');
-
 // Start the server
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
