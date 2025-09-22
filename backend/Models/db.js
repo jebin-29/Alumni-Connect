@@ -8,8 +8,13 @@ require('./Post');
 
 const mongo_uri = process.env.MONGO_URI;
 
+if (!mongo_uri) {
+    console.error("❌ No MongoDB URI found! Set MONGO_URI in Render env.");
+    process.exit(1);
+  }
+
 mongoose.connect(mongo_uri)
-    .then(() => console.log('✅ MongoDB connected locally'))
+    .then(() => console.log('✅ MongoDB connected Successfully'))
     .catch((err) => {
         console.error('❌ MongoDB connection error:', err.message);
         process.exit(1); // Exit if connection fails
