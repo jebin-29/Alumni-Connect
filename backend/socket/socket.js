@@ -13,7 +13,7 @@ function initSocket(server) {
   
   io = new Server(server, {
     cors: {
-      origin: ['http://localhost:5173', 'http://localhost:3000','https://alumni-connect-puce.vercel.app'],
+      origin: ['http://localhost:5173', 'http://localhost:3000','https://alumni-connect-puce.vercel.app', 'https://alumni-connect-cx929wgnx-jebin-ds-projects.vercel.app'],
       methods: ['GET', 'POST'],
       credentials: true,
       allowedHeaders: ['Authorization', 'Content-Type']
