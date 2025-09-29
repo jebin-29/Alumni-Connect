@@ -47,8 +47,10 @@ function StudentReg() {
     formData.append('confirmPassword', confirmPassword);
     formData.append('image', profilePhoto);
 
+    const API = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`, formData, {
+      const response = await axios.post(`${API}/api/auth/signup`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data', // Set the content type for file upload
         },

@@ -47,8 +47,10 @@ function AlumniReg() {
       formData.append('degreeCertificate', degreeCertificate);
     }
 
+    const API = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/alumni/signup`, formData, {
+      const response = await axios.post(`${API}/api/alumni/signup`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
