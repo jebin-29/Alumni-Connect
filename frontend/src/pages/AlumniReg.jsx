@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils/utils';
 import { ToastContainer } from 'react-toastify';
+import axios from 'axios';
 
 function AlumniReg() {
   const [fullName, setFullName] = useState('');
@@ -42,15 +42,13 @@ function AlumniReg() {
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
     formData.append('linkedin', linkedin);
-    formData.append('image', profilePhoto); // Ensure the backend expects this field name
+    formData.append('image', profilePhoto);
     if (degreeCertificate) {
       formData.append('degreeCertificate', degreeCertificate);
     }
 
-    const API = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
-
     try {
-      const response = await axios.post(`${API}/api/alumni/signup`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/alumni/signup`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
