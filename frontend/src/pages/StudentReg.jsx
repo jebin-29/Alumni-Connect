@@ -47,12 +47,10 @@ function StudentReg() {
     formData.append('confirmPassword', confirmPassword);
     formData.append('image', profilePhoto);
 
-    const API = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
-
     try {
-      const response = await axios.post(`${API}/api/auth/signup`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Set the content type for file upload
+          'Content-Type': 'multipart/form-data',
         },
       });
   
@@ -85,7 +83,6 @@ function StudentReg() {
               onChange={(e)=> setFullName(e.target.value)}
               placeholder="Enter your full name"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -96,7 +93,6 @@ function StudentReg() {
               value={graduationYear}
               onChange={(e)=> setGraduationYear(e.target.value)}
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             >
               <option value="">Select your graduation year</option>
               {years.map((year) => (
@@ -116,7 +112,6 @@ function StudentReg() {
               onChange={(e)=> setCollegeEmail(e.target.value)}
               placeholder="Enter your college email"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -129,7 +124,6 @@ function StudentReg() {
               onChange={(e)=> setCourse(e.target.value)}
               placeholder="Enter your course"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -142,7 +136,6 @@ function StudentReg() {
               onChange={(e)=> setUsn(e.target.value)}
               placeholder="Enter your USN"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -155,7 +148,6 @@ function StudentReg() {
               onChange={(e)=> setFieldOfStudy(e.target.value)}
               placeholder="Enter your field of study"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -192,7 +184,6 @@ function StudentReg() {
               onChange={(e)=> setPassword(e.target.value)}
               placeholder="Enter your password"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -205,7 +196,6 @@ function StudentReg() {
               onChange={(e)=> setConfirmPassword(e.target.value)}
               placeholder="Confirm your password"
               className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-
             />
           </div>
           <div className="flex flex-col">
@@ -225,7 +215,6 @@ function StudentReg() {
           </div>
         </form>
         <div className="text-center mt-4">
-          {/* <button onClick={()=>navigate('/roleselection')} className='bg-primary font-outfit text-white px-10 py-3 rounded-full font-light hidden md:block hover:bg-orange-600 transition'>Create Account</button> */}
           <p className="text-gray-700">Have an Account? <Link to="/login" className="text-blue-500 hover:underline">Login</Link></p>
         </div>
         <ToastContainer />
